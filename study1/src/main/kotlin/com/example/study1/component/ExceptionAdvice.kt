@@ -5,11 +5,16 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import java.util.logging.Logger
 
 @RestControllerAdvice
 class ExceptionAdvice {
+
+    val logger = Logger.getLogger(ExceptionAdvice::class.java.name)
+
     @ExceptionHandler(Exception::class)
-    fun boardNotFoundExceptionAdvice() : ResponseEntity<RestResult> {
+    fun exceptionAdvice(e: Exception) : ResponseEntity<RestResult> {
+        logger.warning(StringUtils().getStackTrace(e))
         var result = RestResult()
         result.message = "서버에서 오류가 발생하였습니다."
         return ResponseEntity(result, HttpStatus.INTERNAL_SERVER_ERROR);
