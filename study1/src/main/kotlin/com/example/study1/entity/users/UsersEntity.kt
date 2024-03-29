@@ -18,6 +18,8 @@ open class UsersEntity(
     @Column(length = 30)
     val name: String,
     @Column(length = 30, nullable = true)
+    val email: String?,
+    @Column(length = 30, nullable = true)
     val phone: String?,
 
     val createdAt: LocalDateTime = LocalDateTime.now(),
