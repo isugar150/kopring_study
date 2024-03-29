@@ -1,8 +1,8 @@
 package com.example.study1.controller
 
+import com.example.study1.component.constant.HttpMethod
 import com.example.study1.dto.common.RestResult
 import com.example.study1.dto.users.UsersDto
-import com.example.study1.entity.users.UsersEntity
 import com.example.study1.repository.UsersRepository
 import org.springframework.beans.factory.annotation.Autowired
 import jakarta.servlet.http.HttpServletRequest
@@ -34,13 +34,13 @@ class HomeController() {
     fun users(param: UsersDto, request: HttpServletRequest): ResponseEntity<RestResult> {
         var result = RestResult()
 
-        if (request.method.equals("GET")) { // Read
+        if (request.method.equals(HttpMethod.GET)) { // Read
             result.list = usersRepository.findAll()
             result.success = true
-        } else if (request.method.equals("POST") || request.method.equals("PUT") || request.method.equals("PATCH")) { // Create, Update
+        } else if (request.method.equals(HttpMethod.POST) || request.method.equals(HttpMethod.PUT) || request.method.equals(HttpMethod.PATCH)) { // Create, Update
             usersRepository.save(param.toEntity())
             result.success = true
-        }else if (request.method.equals("DELETE")) { // Delete
+        }else if (request.method.equals(HttpMethod.DELETE)) { // Delete
             param.id?.let {
                 usersRepository.deleteById(it)
                 result.success = true
