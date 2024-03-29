@@ -6,7 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 data class RestResult(
     var success: Boolean = false,
     var message: String = "",
-    var data: HashMap<String, Any> = HashMap()
+    var data: HashMap<String, Any>? = null,
+    var list: List<Any>? = null
 ) {
 
     fun setData(param: Any?) {
@@ -17,7 +18,7 @@ data class RestResult(
         if (data == null) {
             data = HashMap()
         }
-        data[name!!] = param!!
+        data!![name!!] = param!!
     }
 
 }

@@ -1,10 +1,11 @@
 package com.example.study1.controller
 
 import com.example.study1.dto.common.RestResult
+import com.example.study1.dto.users.UsersDto
+import com.example.study1.entity.users.UsersEntity
 import com.example.study1.repository.UsersRepository
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpMethod
-import org.springframework.http.HttpRequest
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.ui.Model
@@ -30,20 +31,22 @@ class HomeController() {
     }
 
     @RequestMapping("/users")
-    fun users(model: Model, request: HttpRequest): ResponseEntity<RestResult> {
+    fun users(param: UsersDto, request: HttpServletRequest): ResponseEntity<RestResult> {
         var result = RestResult()
 
-
-        if (request.method == HttpMethod.GET) { // Read
-            result.setData("list", usersRepository.findAll())
-        } else if (request.method == HttpMethod.POST) { // Create
-
-        } else if (request.method == HttpMethod.POST || request.method == HttpMethod.PATCH) { // Update
-
-        } else if (request.method == HttpMethod.DELETE) { // Delete
-
+        if (request.method.equals("GET")) { // Read
+            result.list = usersRepository.findAll()
+            result.success = true
+        } else if (request.method.equals("POST") || request.method.equals("PUT") || request.method.equals("PATCH")) { // Create, Update
+            usersRepository.save(param.toEntity())
+            result.success = true
+        }else if (request.method.equals("DELETE")) { // Delete
+            param.id?.let {
+                usersRepository.deleteById(it)
+                result.success = true
+            }
         } else {
-            result.message = "Method "
+            result.message = "Method is not allow"
         }
 
         return ResponseEntity(result, HttpStatus.OK)
