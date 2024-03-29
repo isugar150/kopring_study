@@ -1,7 +1,26 @@
 server:
   port: 8080
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: logs
+      suffix: .log
+      prefix: access
+      file-date-format: .yyyy-MM-dd
+      pattern: "%{yyyy-MM-dd HH:mm:ss}t %s %r %{User-Agent}i %{Referer}i %a %b %D"
+      max-days: 7
+      rotate: true
+    basedir: .
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
 
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    static-path-pattern: /swagger*
   datasource:
     driver-class-name: org.h2.Driver
     username: sa
@@ -30,20 +49,23 @@ spring:
       ddl-auto: create-drop
     properties:
       hibernate:
-        # show_sql: true
         format_sql: true
-        # use_sql_comments: true
     defer-datasource-initialization: false
-#  sql:
-#    init:
-#      schema-locations: classpath:h2-ddl/schema.sql
-#      data-locations: classpath:h2-ddl/data.sql
 
-logging:
-  pattern:
-    console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
-  level:
-    org:
-      hibernate:
-        type.descriptor: trace
-        SQL: debug
+springdoc:
+  packages-to-scan: com.example.study1.controller
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: /swagger-ui/index.html
+    disable-swagger-default-url: true
+    display-request-duration: true
+    operations-sorter: alpha
+
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: info, beans, conditions, health
+        exclude: threaddump, heapdump
