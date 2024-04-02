@@ -37,6 +37,7 @@ class ApiController {
         return ResponseEntity(result, HttpStatus.OK)
     }
 
+    @Operation(summary = "사용자 저장", description = "사용자 정보를 추가합니다.", tags = ["사용자"])
     @PostMapping(value = ["/users"], consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
     fun postUsers(@io.swagger.v3.oas.annotations.parameters.RequestBody(
                         content = [
