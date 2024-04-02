@@ -46,6 +46,13 @@ class ApiController {
                   , request: HttpServletRequest): ResponseEntity<RestResult> {
         var result = RestResult()
 
+        val dto: UsersDto? = usersRepository.findByUserId(param.userId)
+
+        if(dto != null) {
+            result.message = "Duplicate userId"
+            return ResponseEntity(result, HttpStatus.BAD_REQUEST)
+        }
+
         usersRepository.save(param.toEntity())
         result.success = true
 

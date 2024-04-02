@@ -11,30 +11,31 @@ import java.time.LocalDateTime
 @Schema(description = "사용자")
 data class UsersDto(
     @JsonIgnore
-    @Schema(description = "사용자 고유번호", nullable = false)
+    @Schema(description = "사용자 고유번호")
     var id: Long?,
 
-    @Schema(description = "로그인 아이디", nullable = false, example = "test")
+    @NotNull(message = "userId cannot be null")
+    @Schema(description = "로그인 아이디", example = "test")
     var userId: String?,
 
     @NotNull(message = "Password cannot be null")
     @Size(min = 8, message = "Password not be less than two characters")
-    @Schema(description = "사용자 비밀번호", nullable = false, example = "test")
+    @Schema(description = "사용자 비밀번호", example = "test")
     var password: String?,
 
     @NotNull(message = "Name cannot be null")
     @Size(min = 2, message = "Name not be less than two characters")
-    @Schema(description = "사용자 이름", nullable = false, example = "홍길동")
+    @Schema(description = "사용자 이름", example = "홍길동")
     var name: String?,
 
     @NotNull(message = "Email cannot be null")
     @Size(min = 2, message = "Email not be less than two characters")
     @Email
-    @Schema(description = "사용자 이메일", nullable = false, example = "hgd1414@gmail.com")
+    @Schema(description = "사용자 이메일", example = "hgd1414@gmail.com")
     var email: String?,
 
     @NotNull(message = "PhoneNumber cannot be null")
-    @Schema(description = "사용자 핸드폰 번호", nullable = false, example = "010-1212-3131")
+    @Schema(description = "사용자 핸드폰 번호", example = "010-1212-3131")
     var phone: String?,
 
     @JsonIgnore
