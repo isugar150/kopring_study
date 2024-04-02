@@ -3,7 +3,6 @@ package com.example.study1.controller
 import com.example.study1.dto.common.RestResult
 import com.example.study1.dto.users.UsersDto
 import com.example.study1.repository.UsersRepository
-import io.swagger.annotations.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@Api(value = "예제 API", tags = ["example"], description = "Swagger 테스트용 API")
 class ApiController {
 
     @Autowired
