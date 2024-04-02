@@ -9,23 +9,23 @@ open class UsersEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userIdnfr")
-    var id: Long = 0,
+    open var id: Long = 0,
 
     @Column(length = 30)
-    val userId: String,
+    open val userId: String,
     @Column(length = 100)
-    val password: String,
+    open val password: String,
     @Column(length = 30)
-    val name: String,
+    open val name: String,
     @Column(length = 30, nullable = true)
-    val email: String?,
+    open val email: String?,
     @Column(length = 30, nullable = true)
-    val phone: String?,
+    open val phone: String?,
 
-    val createdAt: LocalDateTime = LocalDateTime.now(),
-    val createId: String,
+    open val createdAt: LocalDateTime = LocalDateTime.now(),
+    open val createId: String,
     @Column(nullable = true)
-    val updatedAt: LocalDateTime? = LocalDateTime.now(),
+    open val updatedAt: LocalDateTime? = LocalDateTime.now(),
     @Column(nullable = true)
-    val updateId: String?
+    open val updateId: String?
 ) { }

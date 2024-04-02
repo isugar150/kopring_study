@@ -2,12 +2,8 @@ package com.example.study1.dto.users
 
 import com.example.study1.entity.users.UsersEntity
 import com.fasterxml.jackson.annotation.JsonIgnore
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
-import io.swagger.annotations.ApiOperation
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.Email
-import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
 import java.time.LocalDateTime
