@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface PlaceRepository : JpaRepository<PlaceEntity, Long> {
     override fun findAll(): List<PlaceEntity>?
-    fun findByName(name: String?): PlaceDto?
+    fun findByNameAndLatAndLng(name: String?, lat: String?, lng: String?): PlaceDto?
     override fun <E : PlaceEntity?> save(entity: E): E
     override fun deleteById(id: Long)
 }

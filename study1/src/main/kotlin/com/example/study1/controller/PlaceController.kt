@@ -44,12 +44,12 @@ class PlaceController {
                   , request: HttpServletRequest): ResponseEntity<RestResult> {
         var result = RestResult()
 
-//        val dto: PlaceDto? = placeRepository.findByName(param.name)
+        val dto: PlaceDto? = placeRepository.findByNameAndLatAndLng(param.name, param.lat, param.lng)
 
-//        if(dto != null) {
-//            result.message = "Duplicate userId"
-//            return ResponseEntity(result, HttpStatus.BAD_REQUEST)
-//        }
+        if(dto != null) {
+            result.message = "Duplicate place"
+            return ResponseEntity(result, HttpStatus.BAD_REQUEST)
+        }
 
         placeRepository.save(param.toEntity())
         result.success = true
