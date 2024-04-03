@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class ApiController {
+class UserController {
 
     @Autowired
     lateinit var usersRepository: UsersRepository
