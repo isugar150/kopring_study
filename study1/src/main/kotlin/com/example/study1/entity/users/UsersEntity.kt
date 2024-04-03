@@ -1,11 +1,13 @@
 package com.example.study1.entity.users
 
 import jakarta.persistence.*
+import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "users")
-open class UsersEntity(
+open class UsersEntity (
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userIdnfr")
@@ -27,5 +29,7 @@ open class UsersEntity(
     @Column(nullable = true)
     open val updatedAt: LocalDateTime? = LocalDateTime.now(),
     @Column(nullable = true)
-    open val updateId: String?
+    open val updateId: String?,
+
+    open val authorities: GrantedAuthority
 ) { }
