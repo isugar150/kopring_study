@@ -6,7 +6,6 @@ import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size
-import org.springframework.security.core.GrantedAuthority
 import java.time.LocalDateTime
 
 @Schema(description = "사용자")
@@ -50,9 +49,6 @@ data class UsersDto(
 
     @JsonIgnore
     var updateId: String?,
-
-    @JsonIgnore
-    var authorities: GrantedAuthority
 ) {
     fun toEntity(): UsersEntity {
         if(id != null)
@@ -66,8 +62,7 @@ data class UsersDto(
                 createdAt = createdAt,
                 createId = createId!!,
                 updatedAt = updatedAt,
-                updateId = updateId,
-                authorities = authorities
+                updateId = updateId
             )
         else
             return UsersEntity(
@@ -79,8 +74,7 @@ data class UsersDto(
                 createdAt = createdAt,
                 createId = createId!!,
                 updatedAt = updatedAt,
-                updateId = updateId,
-                authorities = authorities
+                updateId = updateId
             )
     }
 
@@ -97,8 +91,7 @@ data class UsersDto(
                     createdAt = createdAt,
                     createId = createId!!,
                     updatedAt = updatedAt,
-                    updateId = updateId,
-                    authorities = authorities
+                    updateId = updateId
                 )
             }
         }
