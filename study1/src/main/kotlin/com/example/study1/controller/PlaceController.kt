@@ -2,8 +2,12 @@ package com.example.study1.controller
 
 import com.example.study1.dto.common.RestResult
 import com.example.study1.dto.users.PlaceDto
+import com.example.study1.dto.users.PlaceReviewDto
 import com.example.study1.dto.users.UsersDto
+import com.example.study1.entity.users.PlaceEntity
+import com.example.study1.entity.users.PlaceReviewEntity
 import com.example.study1.repository.PlaceRepository
+import com.example.study1.repository.PlaceReviewRepository
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
@@ -22,6 +26,9 @@ class PlaceController {
 
     @Autowired
     lateinit var placeRepository: PlaceRepository
+
+    @Autowired
+    lateinit var placeReviewRepository: PlaceReviewRepository
 
     @Operation(summary = "장소 리스트", description = "장소 리스트를 조회합니다.", tags = ["장소"])
     @GetMapping(value = ["/places"])
@@ -52,6 +59,29 @@ class PlaceController {
         }
 
         placeRepository.save(param.toEntity())
+        result.success = true
+
+        return ResponseEntity(result, HttpStatus.OK)
+    }
+
+    @Operation(summary = "장소 리뷰 작성", description = "장소 리뷰를 작성합니다.", tags = ["장소"])
+    @PostMapping(value = ["/places/review"], consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE])
+    fun postPlacesReview(@io.swagger.v3.oas.annotations.parameters.RequestBody(
+                        content = [
+                            Content(schema = Schema(implementation = PlaceReviewDto::class))
+                        ]
+                    )@Valid param: PlaceReviewDto
+                  , request: HttpServletRequest): ResponseEntity<RestResult> {
+        var result = RestResult()
+
+        val dto: PlaceEntity? = placeRepository.findById(param.placeId)
+
+        if(dto == null) {
+            result.message = "placeId does not exist"
+            return ResponseEntity(result, HttpStatus.BAD_REQUEST)
+        }
+
+        placeReviewRepository.save(param.toEntity())
         result.success = true
 
         return ResponseEntity(result, HttpStatus.OK)
