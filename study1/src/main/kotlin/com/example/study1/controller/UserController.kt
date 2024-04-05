@@ -27,7 +27,12 @@ class UserController {
     fun getUsers(request: HttpServletRequest): ResponseEntity<RestResult> {
         var result = RestResult()
 
-        result.list = usersRepository.findAll()
+        val list = usersRepository.findAll()
+
+        val data: HashMap<String, Any> = HashMap()
+        list?.let { data.put("list", it) }
+
+        result.data = data
         result.success = true
 
         return ResponseEntity(result, HttpStatus.OK)

@@ -29,9 +29,9 @@ open class PlaceEntity (
     @Column(length = 30, nullable = true)
     open val endDate: LocalDateTime?,
 
-    @OneToMany(targetEntity = PlaceReviewEntity::class)
-    @JoinColumn(name = "placeId")
-    open val reviews: Collection<PlaceReviewEntity>?,
+//    @OneToMany(targetEntity = PlaceReviewEntity::class)
+//    @JoinColumn(name = "placeId")
+//    open val reviews: Collection<PlaceReviewEntity>?,
 
     open val createdAt: LocalDateTime = LocalDateTime.now(),
     open val createId: String,

@@ -18,8 +18,11 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import kotlin.math.round
 
 @RestController
 class PlaceController {
@@ -30,12 +33,44 @@ class PlaceController {
     @Autowired
     lateinit var placeReviewRepository: PlaceReviewRepository
 
-    @Operation(summary = "장소 리스트", description = "장소 리스트를 조회합니다.", tags = ["장소"])
+    @Operation(summary = "장소 목록", description = "장소 목록를 조회합니다.", tags = ["장소"])
     @GetMapping(value = ["/places"])
     fun getPlaces(request: HttpServletRequest): ResponseEntity<RestResult> {
         var result = RestResult()
 
-        result.list = placeRepository.findAll()
+        val list = placeRepository.findAll()?.map { obj ->
+            val dto = PlaceDto.fromEntity(obj)
+            val reviewList = placeReviewRepository.findAllByPlaceId(obj.id).map { reviewObj -> PlaceReviewDto.fromEntity(reviewObj) }
+            var addNum = 0.0F
+            if(reviewList.size > 0) {
+                for (star in reviewList) {
+                    addNum += star.star
+                }
+                dto.starAvg = round(addNum / reviewList.size*100) / 100
+            }
+            dto
+        }
+
+        val data: HashMap<String, Any> = HashMap()
+        list?.let { data.put("list", it) }
+
+        result.data = data
+        result.success = true
+
+        return ResponseEntity(result, HttpStatus.OK)
+    }
+
+    @Operation(summary = "장소 리뷰 목록", description = "장소 리뷰 목록을 조회합니다.", tags = ["장소"])
+    @GetMapping(value = ["/places/review/{placeId}"])
+    fun getPlacesReview(@PathVariable placeId: Long, request: HttpServletRequest): ResponseEntity<RestResult> {
+        var result = RestResult()
+
+        val list = placeReviewRepository.findAllByPlaceId(placeId)
+
+        val data: HashMap<String, Any> = HashMap()
+        list?.let { data.put("list", it) }
+
+        result.data = data
         result.success = true
 
         return ResponseEntity(result, HttpStatus.OK)
@@ -51,7 +86,7 @@ class PlaceController {
                   , request: HttpServletRequest): ResponseEntity<RestResult> {
         var result = RestResult()
 
-        val dto: PlaceDto? = placeRepository.findByNameAndLatAndLng(param.name, param.lat, param.lng)
+        val dto: PlaceEntity? = placeRepository.findByNameAndLatAndLng(param.name, param.lat, param.lng)
 
         if(dto != null) {
             result.message = "Duplicate place"

@@ -7,7 +7,7 @@ data class RestResult(
     var success: Boolean = false,
     var message: String = "",
     var data: HashMap<String, Any>? = null,
-    var list: List<Any>? = null
+//    var list: List<Any>? = null
 ) {
 
     fun setData(param: Any?) {
