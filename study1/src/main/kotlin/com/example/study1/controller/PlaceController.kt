@@ -38,8 +38,10 @@ class PlaceController {
     fun getPlaces(request: HttpServletRequest): ResponseEntity<RestResult> {
         var result = RestResult()
 
+
         val list = placeRepository.findAll()?.map { obj ->
             val dto = PlaceDto.fromEntity(obj)
+            // 해당 장소의 리뷰 점수 평균을 구한다
             val reviewList = placeReviewRepository.findAllByPlaceId(obj.id).map { reviewObj -> PlaceReviewDto.fromEntity(reviewObj) }
             var addNum = 0.0F
             if(reviewList.size > 0) {
