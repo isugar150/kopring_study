@@ -1,9 +1,7 @@
-package com.example.study1.entity.users
+package com.example.study1.entity.place
 
 import jakarta.persistence.*
-import java.sql.Time
 import java.time.LocalDateTime
-import java.util.Date
 
 @Entity
 @Table(name = "place")

@@ -1,8 +1,7 @@
-package com.example.study1.dto.users
+package com.example.study1.dto.place
 
-import com.example.study1.entity.users.PlaceEntity
+import com.example.study1.entity.place.PlaceEntity
 import com.fasterxml.jackson.annotation.JsonIgnore
-import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.NotNull
 import jakarta.validation.constraints.Size

@@ -1,9 +1,9 @@
 package com.example.study1.controller
 
 import com.example.study1.dto.common.RestResult
-import com.example.study1.dto.users.PlaceDto
-import com.example.study1.dto.users.PlaceReviewDto
-import com.example.study1.entity.users.PlaceEntity
+import com.example.study1.dto.place.PlaceDto
+import com.example.study1.dto.place.PlaceReviewDto
+import com.example.study1.entity.place.PlaceEntity
 import com.example.study1.repository.PlaceRepository
 import com.example.study1.repository.PlaceReviewRepository
 import io.swagger.v3.oas.annotations.Operation

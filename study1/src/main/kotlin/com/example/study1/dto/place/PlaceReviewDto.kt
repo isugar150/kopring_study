@@ -1,6 +1,6 @@
-package com.example.study1.dto.users
+package com.example.study1.dto.place
 
-import com.example.study1.entity.users.PlaceReviewEntity
+import com.example.study1.entity.place.PlaceReviewEntity
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.swagger.v3.oas.annotations.media.Schema
 import jakarta.validation.constraints.DecimalMax

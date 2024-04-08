@@ -1,12 +1,9 @@
-package com.example.study1.entity.users
+package com.example.study1.entity.place
 
 import jakarta.persistence.*
 import jakarta.validation.constraints.DecimalMax
 import jakarta.validation.constraints.DecimalMin
-import org.hibernate.validator.constraints.Length
-import java.sql.Time
 import java.time.LocalDateTime
-import java.util.Date
 
 @Entity
 @Table(name = "placeReview")

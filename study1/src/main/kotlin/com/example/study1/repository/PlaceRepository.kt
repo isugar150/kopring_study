@@ -1,9 +1,6 @@
 package com.example.study1.repository
 
-import com.example.study1.dto.users.PlaceDto
-import com.example.study1.dto.users.UsersDto
-import com.example.study1.entity.users.PlaceEntity
-import com.example.study1.entity.users.UsersEntity
+import com.example.study1.entity.place.PlaceEntity
 import org.springframework.stereotype.Repository
 
 @Repository
