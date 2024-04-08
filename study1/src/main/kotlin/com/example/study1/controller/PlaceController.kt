@@ -47,6 +47,7 @@ class PlaceController {
                 }
                 dto.starAvg = round(addNum / reviewList.size*100) / 100
             }
+            dto.starCnt = reviewList.size
             dto
         }
 

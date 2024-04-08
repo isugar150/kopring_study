@@ -40,6 +40,7 @@ data class PlaceDto(
 
     @Schema(hidden = true)
     var starAvg: Float = 0.0F,
+    var starCnt: Int = 0,
 
     @JsonIgnore
     var createdAt: LocalDateTime = LocalDateTime.now(),
