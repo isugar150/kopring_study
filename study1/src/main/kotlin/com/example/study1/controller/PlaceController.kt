@@ -3,9 +3,7 @@ package com.example.study1.controller
 import com.example.study1.dto.common.RestResult
 import com.example.study1.dto.users.PlaceDto
 import com.example.study1.dto.users.PlaceReviewDto
-import com.example.study1.dto.users.UsersDto
 import com.example.study1.entity.users.PlaceEntity
-import com.example.study1.entity.users.PlaceReviewEntity
 import com.example.study1.repository.PlaceRepository
 import com.example.study1.repository.PlaceReviewRepository
 import io.swagger.v3.oas.annotations.Operation
@@ -20,7 +18,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import kotlin.math.round
 
