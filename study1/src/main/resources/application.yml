@@ -1,5 +1,5 @@
 server:
-  port: 18080
+  port: 18081
   tomcat:
     accesslog:
       enabled: true
@@ -51,6 +51,15 @@ spring:
       hibernate:
         format_sql: true
     defer-datasource-initialization: false
+  kafka:
+    producer:
+      bootstrap-servers: 127.0.0.1:29092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      bootstrap-servers: 127.0.0.1:29092
+      group-id: consumer_group01
+      auto-offset-reset: earliest
 
 springdoc:
   packages-to-scan: com.example.study1.controller
